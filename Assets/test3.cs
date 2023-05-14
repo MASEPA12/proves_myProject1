@@ -26,10 +26,11 @@ public class test3 : MonoBehaviour
 
     //sss
     public bool isColliding;
-    public bool sweepTest1;
+    public bool isCollidingSphere;
 
     //rigidbody
     public Rigidbody rb;
+
     private void Start()
     {
         transform.position = Vector3.up;
@@ -42,6 +43,7 @@ public class test3 : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal"); //movement front/back
         verticalInput = Input.GetAxis("Vertical"); //movement front/back
         transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
+        transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
 
         //asignam es centres per es capsulecast
         centre1 = transform.position + Vector3.down * altura;
@@ -49,29 +51,34 @@ public class test3 : MonoBehaviour
         playerDirection = new Vector3(verticalInput, 0, horizontalInput);
 
                                     //sphere 1 , sphere2, en direcció a on, final capsula, capa que farà cas
-        isColliding = Physics.CapsuleCast(centre1, centre2, radi, playerDirection, finalCapsula, layerMask1);
-        
-        sweepTest1 = rb.SweepTest(playerDirection, out hit, finalCapsula);
+       // isColliding = Physics.CapsuleCast(centre1, centre2, radi, transform.forward,out hit, finalCapsula, layerMask1);
 
+        isCollidingSphere = Physics.SphereCast(centre1, radi, playerDirection, out hit, finalCapsula, layerMask1);
 
-        if (sweepTest1 == true)// si aqui on ha de anar ha de colisionar
+        if (isCollidingSphere == true && (hit.distance < 0.5f || hit.distance > -0.5f))
         {
-            Debug.Log("colisionaras proximamente");
-        }
+            Debug.Log("AAAAAA");
+            
+                //vol anar cap endavant
+            if (playerDirection.x > 0)
+            {
+                playerDirection.x = 0;
+                Debug.Log("GOING FRONT");
+                playerDirection.z = 1;
+            }
+                //si vol anar cap enrrere
+            if (playerDirection.x <= 0)
+            {
+                playerDirection.x = 0;
+                playerDirection.z = 1;
 
-        if (isColliding == true)
-        {
-            Debug.Log("siiiii");
-            //si està colisionant, sa posició se restablecerà per sa anterior inmediata
-            transform.position = position;
-
+                Debug.Log("GOING FRONT");
+            }
         }
         else
         {
             Debug.Log("NOOO");
             //si no està colisionant, sa posició se guardarà per quan colisioni
-            position = transform.position;
-
         }
     }
 
@@ -80,7 +87,7 @@ public class test3 : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(centre1,radi);
         
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(centre2,radi);
+       /* Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(centre2,radi);*/
     }
 }
