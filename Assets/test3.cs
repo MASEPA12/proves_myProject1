@@ -15,12 +15,8 @@ public class test3 : MonoBehaviour
 
     public Vector3 playerDirection;
 
-    private Vector3 position;
-
     //aa
     private float speed = 50f;
-    private float turnSpeed = 100f;
-    private float rotationInput;
     private float verticalInput;
     private float horizontalInput;
 
@@ -84,8 +80,8 @@ public class test3 : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(centre1,radi);
+        //Gizmos.color = Color.magenta;
+        //Gizmos.DrawWireSphere(centre1,radi);
         
        /* Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(centre2,radi);*/

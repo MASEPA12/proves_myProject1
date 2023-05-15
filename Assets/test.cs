@@ -4,53 +4,36 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
-    /*Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+    public Vector3 centre;
+    public Vector3 halfExtents;
+    public bool isInTheBox = false;
+    public LayerMask layerMask2;
 
-    Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
+    private void Start()
+    {
+    }
+
     private void Update()
     {
-            float moveDistance = moveSpeed * Time.deltaTime;
-            float playerRadius = .7f;
-            float playerHeight = 2f;
-            bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
-                playerRadius, moveDir, moveDistance);
-        if (!canMove)
-                {
-                    // Si nos estamos chocando, en el caso en que nos estemos moviendo en diagonal, vamos a intentar movernos en una dirección
-                    // Probar dirección X
-                    Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized; // Importante normalizar para que no vaya más lento (moveDir ya estaba normalizado y este es el caso en que nos movemos en diagonal)
-                    canMove = (moveDir.x< -0.5f || moveDir.x> 0.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up* playerHeight,
-                        playerRadius, moveDirX, moveDistance);
+        centre = transform.position; //li sumam un pq estigui centrat es cnetre de sa box
 
-                    if (canMove)
-                    {
-                        // Nos movemos solo en X
-                        moveDir = moveDirX;
-                    }
-                    else
+        if(Physics.CheckBox(centre, halfExtents,Quaternion.identity,layerMask2) == true) //if something is inside the box...
         {
-            // No nos podemos mover en X
-            // Probar dirección Z
-            Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized; // Importante normalizar para que no vaya más lento (moveDir ya estaba normalizado y este es el caso en que nos movemos en diagonal)
-            canMove = (moveDir.z < -0.5f  moveDir.z > 0.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
-                playerRadius, moveDirZ, moveDistance);
-
-            if (canMove)
-            {
-                // Nos movemos solo en Z
-                moveDir = moveDirZ;
-            }
+            isInTheBox = true;
+            Debug.Log("SOMETHING IS INSIDE THE BOX");
         }
-
-                }
-        if (canMove)
+        else
         {
-            transform.position += moveDir * moveDistance;
-        }
+            isInTheBox = false;
+            //Debug.Log("NOTHING IS IN THE BOX");
 
-            }
-    }*/
-    
+        }
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(centre, halfExtents);
+    }
 }
 
 
