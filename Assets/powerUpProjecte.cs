@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class powerUpProjecte : MonoBehaviour
 {
-    //dins es game manager
+    /*//dins es game manager
     public bool appleGreenIsOn = false;
     public GameObject sliderPanelGreen;
     public float time; //(una variable que ja està feta dins s'escript de power ups)
@@ -13,7 +13,7 @@ public class powerUpProjecte : MonoBehaviour
          - conexió amb sa speed (PlayerMovement.walkingForce)
          - 
 
-     */
+     
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,7 +25,7 @@ public class powerUpProjecte : MonoBehaviour
     }
 
     //això anirà ficat dins;   --> canviar d'on agafa sa variable, l'ha de agafar de script "PowerUp"
-    /* if(other.CompareTag(appleGreen) && gameManagerScript.appleGreenIsOn == false){ */
+    /* if(other.CompareTag(appleGreen) && gameManagerScript.appleGreenIsOn == false){ 
     public IEnumerator SpeedPowerUp(float speed,float durationOfPowerUp)
    {
         speed *= 2; //duble up the speed
@@ -66,5 +66,5 @@ public class powerUpProjecte : MonoBehaviour
             yield return new WaitForSeconds(0.5f); //wait 30 seconds to low the number
         }
 
-    }
+    }*/
 }
