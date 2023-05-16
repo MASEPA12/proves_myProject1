@@ -29,7 +29,7 @@ public class test3 : MonoBehaviour
 
     private void Start()
     {
-        transform.position = Vector3.up;
+        //transform.position = Vector3.up;
         rb = GetComponent<Rigidbody>();
     }
     void Update()

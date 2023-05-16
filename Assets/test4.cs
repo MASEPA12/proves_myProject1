@@ -19,7 +19,7 @@ public class test4 : MonoBehaviour
     private Vector3 position;
 
     //aa
-    private float speed = 50f;
+    private float speed = 10f;
     private float turnSpeed = 100f;
     private float rotationInput;
     private float verticalInput;
@@ -30,32 +30,32 @@ public class test4 : MonoBehaviour
 
     //rigidbody
     public Rigidbody rb;
-    public test testScript;
+    //public test testScript;
 
     private void Start()
     {
         //transform.position = Vector3.up;
         rb = GetComponent<Rigidbody>();
-        testScript = FindObjectOfType<test>();
+        //testScript = FindObjectOfType<test>();
     }
     void FixedUpdate()
     {
         //moviment
         horizontalInput = Input.GetAxis("Horizontal"); //movement front/back
         verticalInput = Input.GetAxis("Vertical"); //movement front/back
-        transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
-        transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
+        //transfo speed * Time.deltaTime * horizontalInput);
+
+        playerDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
+        transform.position += playerDirection * Time.deltaTime * speed;
 
         //asignam es centres per es capsulecast
         centre1 = transform.position + Vector3.down * altura;
         centre2 = transform.position + Vector3.up * altura;
 
-
-        playerDirection = new Vector3(Input.GetAxisRaw("Vertical"),0, Input.GetAxisRaw("Horizontal"));
-
         RaycastHit hit;
                                     //sphere 1 , sphere2, en direcci a on, final capsula, capa que fa cas
-        isColliding = Physics.CapsuleCast(centre1, centre2, radi, Vector3.forward , finalCapsula, layerMask1);
+        isColliding = Physics.CapsuleCast(centre1, centre2, radi, playerDirection, finalCapsula, layerMask1);
 
         if (isColliding == true)
         {
